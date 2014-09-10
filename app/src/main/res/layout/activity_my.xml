@@ -24,9 +24,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="send"
+        android:text="Send"
         android:layout_toRightOf="@id/studyNumber"
-        android:layout_alignTop="@+id/studyNumber"
+        android:layout_alignBottom="@+id/studyNumber"
 
         />
 
