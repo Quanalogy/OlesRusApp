@@ -12,13 +12,6 @@
     >
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="send"
-        android:layout_alignRight="@id/studyNumber"
-
-        />
 
     <EditText
         android:id="@+id/studyNumber"
@@ -28,6 +21,13 @@
         android:text="Indtast Studienummer"
         />
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="send"
+        android:layout_toRightOf="@id/studyNumber"
+        android:layout_alignTop="@+id/studyNumber"
 
+        />
 
 </RelativeLayout>
