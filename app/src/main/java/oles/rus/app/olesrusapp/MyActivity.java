@@ -34,6 +34,6 @@ public class MyActivity extends Activity {
 
     public void sendStudyNumber(View view)
     {
-
+        // TODO: Validate the studynumber. Go to the map-view.
     }
 }
