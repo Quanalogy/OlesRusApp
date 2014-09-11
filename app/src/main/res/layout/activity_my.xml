@@ -28,7 +28,7 @@
         android:text="Send"
         android:layout_toRightOf="@id/studyNumber"
         android:layout_alignBottom="@+id/studyNumber"
-
+        android:onClick="sendStudyNumber"
         />
 
 </RelativeLayout>
