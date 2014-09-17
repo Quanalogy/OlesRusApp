@@ -7,5 +7,7 @@
 
     <color name="bg">#0000FF</color>
     <string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyC1Cjkpk5-0h-yXlrjsEerlq2LWfSDwAQ8</string>
+    <string name="text_field_text">Indtast Studienummer</string>
+    <string name="sendButton_text">Send</string>
 
 </resources>
