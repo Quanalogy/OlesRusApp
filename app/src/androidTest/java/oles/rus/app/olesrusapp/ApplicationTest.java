@@ -11,11 +11,10 @@ public class ApplicationTest extends InstrumentationTestCase
     public ApplicationTest() {
     }
 
-    public void testTest()
-    {
-        System.out.println("TESTING");
-        final int expected = 1;
-        final int reality = 5;
-        assertEquals(expected, reality);
-    }
+//    public void testTest()
+//    {
+//        final int expected = 1;
+//        final int reality = 5;
+//        assertEquals(expected, reality);
+//    }
 }
