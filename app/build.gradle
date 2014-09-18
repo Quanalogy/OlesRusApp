@@ -1,9 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        config {
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+            storeFile file('~/Documents/Projects/RusApp/OlesRusApp/debug.keystore')
+            storePassword 'android'
+        }
+    }
     compileSdkVersion 20
     buildToolsVersion "20.0.0"
-
     defaultConfig {
         applicationId "oles.rus.app.olesrusapp"
         minSdkVersion 14
