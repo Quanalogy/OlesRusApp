@@ -48,12 +48,21 @@ public class MapActivity extends FragmentActivity
         }
     }
 
+    private void addMyLocation()
+    {
+        if(null != googleMap)
+        {
+            googleMap.setMyLocationEnabled(true);
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         createMapView();
         addMarker();
+        addMyLocation();
     }
 
 
