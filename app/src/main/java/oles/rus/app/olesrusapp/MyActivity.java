@@ -40,7 +40,7 @@ public class MyActivity extends Activity {
     {
         // TODO: Validate the studynumber. Go to the map-view.
 
-        Intent intent = new Intent(this, MapActivity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
         intent.putExtra(EXTRA_MESSAGE, message);

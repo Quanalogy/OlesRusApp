@@ -24,12 +24,12 @@
             </intent-filter>
         </activity>
 
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBNGOPVsVJhXseSl09wl3LTpkwWu0VPYjI" />
+        <!--<meta-data-->
+            <!--android:name="com.google.android.gms.version"-->
+            <!--android:value="@integer/google_play_services_version" />-->
+        <!--<meta-data-->
+            <!--android:name="com.google.android.maps.v2.API_KEY"-->
+            <!--android:value="AIzaSyBNGOPVsVJhXseSl09wl3LTpkwWu0VPYjI" />-->
 
         <activity
             android:name=".MapActivity"
@@ -40,6 +40,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="oles.rus.app.olesrusapp.MyActivity" />
         </activity>
+
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
+        <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="@string/google_maps_key"/>
+
+        <activity android:name="oles.rus.app.olesrusapp.MapsActivity"
+                  android:label="@string/title_activity_maps">
+            <meta-data android:name="android.support.PARENT_ACTIVITY"
+                       android:value="oles.rus.app.olesrusapp.MyActivity" />
+
+        </activity>
     </application>
 
 </manifest>
+
