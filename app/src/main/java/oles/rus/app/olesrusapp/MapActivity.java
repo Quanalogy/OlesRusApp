@@ -36,17 +36,17 @@ public class MapActivity extends FragmentActivity
         }
     }
 
-    private void addMarker()
-    {
-        if(null != googleMap)
-        {
-            googleMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(0, 0))
-                    .title("Marker")
-                    .draggable(true)
-            );
-        }
-    }
+//    private void addMarker()
+//    {
+//        if(null != googleMap)
+//        {
+//            googleMap.addMarker(new MarkerOptions()
+//                    .position(new LatLng(0, 0))
+//                    .title("Marker")
+//                    .draggable(true)
+//            );
+//        }
+//    }
 
     private void addMyLocation()
     {
@@ -61,7 +61,7 @@ public class MapActivity extends FragmentActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
         createMapView();
-        addMarker();
+//        addMarker();
         addMyLocation();
     }
 
