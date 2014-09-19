@@ -3,20 +3,34 @@ package oles.rus.app.olesrusapp;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity {
+public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
 
+    // The map from the layout
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    // Object used to get the current location
+    private LocationClient mLocationClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        mLocationClient = new LocationClient(this, this, this);
+    }
+
+    @Override
+    protected void onStart()
+    {
+        super.onStart();
+        mLocationClient.connect();
     }
 
     @Override
@@ -60,6 +74,35 @@ public class MapsActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("0, 0"));
+
+        // Enables the blue circle at the users current location
+        mMap.setMyLocationEnabled(true);
+
+//        LatLng myPos = new LatLng(mMap.getMyLocation().getLatitude(), mMap.getMyLocation().getLongitude());
+//        mMap.addMarker(new MarkerOptions().position(mLocationClient.getLastLocation()).title(("MyPos")));
+    }
+
+    @Override
+    public void onConnected(Bundle bundle)
+    {
+        // Gets the position of the client
+        LatLng myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
+        // Adds a marker at the position of the client
+        mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
+
+        (new Thread(new SendThread(mLocationClient))).run();
+    }
+
+    @Override
+    public void onDisconnected()
+    {
+
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult)
+    {
+
     }
 }
