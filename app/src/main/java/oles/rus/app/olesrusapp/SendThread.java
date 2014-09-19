@@ -11,7 +11,7 @@ import com.google.android.gms.location.LocationClient;
 public class SendThread implements Runnable
 {
     private LocationClient locationClient;
-    public static final int DELAY = 5000; // The time to sleep between each run in milliseconds
+    public static final int DELAY = 1000; // The time to sleep between each run in milliseconds
 
     public SendThread(LocationClient locationClient)
     {
@@ -21,7 +21,8 @@ public class SendThread implements Runnable
     @Override
     public void run()
     {
-        while(true)
+        Log.e("olesApp", "Starting sendThread");
+        while(!Thread.currentThread().isInterrupted())
         {
             // Get the location
             Location pos = locationClient.getLastLocation();
@@ -29,6 +30,7 @@ public class SendThread implements Runnable
             double lng = pos.getLongitude();
 
             // TODO: Send the location
+            Log.e("olesApp", lat + ", " + lng);
 
             // Sleep
             try {

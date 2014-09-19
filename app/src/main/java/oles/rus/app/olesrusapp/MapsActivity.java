@@ -18,6 +18,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     // Object used to get the current location
     private LocationClient mLocationClient;
 
+    private Thread sendThread;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +39,13 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     protected void onResume() {
         super.onResume();
         setUpMapIfNeeded();
+    }
+
+    @Override
+    protected void onStop()
+    {
+        super.onStop();
+        sendThread.interrupt();
     }
 
     /**
@@ -91,13 +100,14 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         // Adds a marker at the position of the client
         mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
 
-        (new Thread(new SendThread(mLocationClient))).run();
+        sendThread = new Thread(new SendThread(mLocationClient));
+        sendThread.start();
     }
 
     @Override
     public void onDisconnected()
     {
-
+        sendThread.interrupt();
     }
 
     @Override
