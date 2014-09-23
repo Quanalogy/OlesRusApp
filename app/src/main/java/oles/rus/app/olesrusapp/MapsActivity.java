@@ -13,12 +13,20 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
 
+    private static MapsActivity mapsActivity;
     // The map from the layout
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     // Object used to get the current location
     private LocationClient mLocationClient;
 
     private Thread sendThread;
+    private Thread recieveThread;
+
+    public MapsActivity()
+    {
+        super();
+        mapsActivity = this;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +53,10 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     protected void onStop()
     {
         super.onStop();
-        sendThread.interrupt();
+        if(null != sendThread)
+            sendThread.interrupt();
+        if(null != recieveThread)
+            recieveThread.interrupt();
     }
 
     /**
@@ -102,17 +113,30 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
         sendThread = new Thread(new SendThread(mLocationClient));
         sendThread.start();
+        recieveThread = new Thread(new RecieveThread());
+        recieveThread.start();
     }
 
     @Override
     public void onDisconnected()
     {
         sendThread.interrupt();
+        recieveThread.interrupt();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult)
     {
 
+    }
+
+    public GoogleMap getMap()
+    {
+        return mMap;
+    }
+
+    public static MapsActivity getMapsActivity()
+    {
+        return mapsActivity;
     }
 }

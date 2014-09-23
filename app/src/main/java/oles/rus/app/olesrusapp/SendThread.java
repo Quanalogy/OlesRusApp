@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.android.gms.location.LocationClient;
 
 /**
- * Created by markus on 9/19/14.
+ * Created by borimino on 9/19/14.
  */
 public class SendThread implements Runnable
 {
