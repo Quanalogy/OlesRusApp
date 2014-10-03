@@ -3,6 +3,7 @@ package oles.rus.app.olesrusapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -39,10 +40,12 @@ public class MyActivity extends Activity {
     public void sendStudyNumber(View view)
     {
         // TODO: Validate the studynumber. Go to the map-view.
-
-        Intent intent = new Intent(this, MapsActivity.class);
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
+
+        Log.i("OlesRusApp", new LoginCom().execute(message).toString());
+
+        Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }

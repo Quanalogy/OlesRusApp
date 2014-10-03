@@ -36,7 +36,7 @@ public class SendThread implements Runnable
             try {
                 Thread.sleep(DELAY);
             } catch (InterruptedException e) {
-                Log.e("olesApp", e.toString());
+//                Log.e("olesApp", e.toString());
                 break;
             }
         }
