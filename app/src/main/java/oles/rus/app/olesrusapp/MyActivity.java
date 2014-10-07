@@ -18,6 +18,10 @@ public class MyActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
+
+        Typewriter typewriter = (Typewriter) findViewById(R.id.typeWriter);
+//        typewriter.setCharacterDelay(150);
+        typewriter.animateText("Hello World.\nHow are you?");
     }
 
 
