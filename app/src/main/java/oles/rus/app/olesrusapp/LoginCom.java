@@ -25,7 +25,6 @@ import java.io.UnsupportedEncodingException;
  */
 public class LoginCom extends AsyncTask<String, Void, User>
 {
-    private static StringBuilder stringBuilder = new StringBuilder();
     private static String baseURL = "http://pvc.archan.dk/";
 
     public static User login(String studynumber)
@@ -41,8 +40,7 @@ public class LoginCom extends AsyncTask<String, Void, User>
             JSONObject jsonUser = sendToUrl("login", jsonStudynumber);
 
             //Return User
-            User user = new User(Integer.parseInt(jsonUser.get("userId").toString()), Integer.parseInt(jsonUser.get("groupId").toString()));
-            return user;
+            return new User(Integer.parseInt(jsonUser.get("userId").toString()), Integer.parseInt(jsonUser.get("groupId").toString()));
 
         } catch (JSONException e)
         {
@@ -56,7 +54,8 @@ public class LoginCom extends AsyncTask<String, Void, User>
     {
         HttpClient httpClient = new DefaultHttpClient();
 
-        try {
+        try
+        {
             HttpPost request = new HttpPost(baseURL + addedURL);
             StringEntity params2 = new StringEntity(params.toString());
             request.addHeader("content-type", "application/json");
@@ -69,44 +68,51 @@ public class LoginCom extends AsyncTask<String, Void, User>
             {
                 InputStream inputStream = entity.getContent();
                 String result = convertStreamToString(inputStream);
-                JSONObject jsonObject = new JSONObject(result);
-                return jsonObject;
+                return new JSONObject(result);
             }
 
 
         } catch (ClientProtocolException e)
         {
-            Log.e("OlesRusApp", e.toString());
+            Log.e("OlesRusApp", e.toString() + "\n" + Log.getStackTraceString(e));
         } catch (UnsupportedEncodingException e)
         {
-            Log.e("OlesRusApp", e.toString());
+            Log.e("OlesRusApp", e.toString() + "\n" + Log.getStackTraceString(e));
         } catch (IOException e)
         {
-            Log.e("OlesRusApp", e.toString());
+            Log.e("OlesRusApp", e.toString() + "\n" + Log.getStackTraceString(e));
         } catch (JSONException e)
         {
-            Log.e("OlesRusApp", e.toString());
+            Log.e("OlesRusApp", e.toString() + "\n" + Log.getStackTraceString(e));
         }
 
         return null;
     }
 
-    private static String convertStreamToString(InputStream is) {
+    private static String convertStreamToString(InputStream is)
+    {
 
         BufferedReader reader = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
 
-        String line = null;
-        try {
-            while ((line = reader.readLine()) != null) {
-                sb.append(line + "\n");
+        String line;
+        try
+        {
+            while ((line = reader.readLine()) != null)
+            {
+                sb.append(line);
+                sb.append("\n");
             }
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             Log.e("OlesRusApp", e.toString());
-        } finally {
-            try {
+        } finally
+        {
+            try
+            {
                 is.close();
-            } catch (IOException e) {
+            } catch (IOException e)
+            {
                 Log.e("OlesRusApp", e.toString());
             }
         }
