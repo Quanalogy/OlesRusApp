@@ -9,8 +9,9 @@ public class Typewriter extends TextView
 {
 
     private CharSequence mText;
+    private static final int BLINKS_BEFORE = 4;
     private int mIndex;
-    private long mDelay = 150; //Default 500ms delay
+    private long mDelay = 150;
     private static final int CURSOR_DUR = 6;
     private static final int NEW_LINE_MULTIPLIER = 3;
 
@@ -27,7 +28,7 @@ public class Typewriter extends TextView
     private Runnable characterAdder = new Runnable() {
         @Override
         public void run() {
-            if(mIndex <= mText.length()) {
+            if(mIndex <= mText.length() && mIndex >= 0) {
                 long delay = mDelay;
                 if (mIndex < mText.length() && mText.charAt(mIndex) == '\n')
                 {
@@ -35,12 +36,21 @@ public class Typewriter extends TextView
                 }
                 setText(mText.subSequence(0, mIndex++) + "\u2588");
                 mHandler.postDelayed(characterAdder, delay);
-            } else {
+            } else if(mIndex > mText.length()){
                 if (mIndex % CURSOR_DUR < CURSOR_DUR/2)
                 {
                     setText(mText + "\u2588");
                 } else {
                     setText(mText);
+                }
+                mIndex++;
+                mHandler.postDelayed(characterAdder, mDelay);
+            } else {
+                if (Math.abs(mIndex) % CURSOR_DUR < CURSOR_DUR/2)
+                {
+                    setText("\u2588");
+                } else {
+                    setText(" ");
                 }
                 mIndex++;
                 mHandler.postDelayed(characterAdder, mDelay);
@@ -50,7 +60,7 @@ public class Typewriter extends TextView
 
     public void animateText(CharSequence text) {
         mText = text;
-        mIndex = 0;
+        mIndex = -BLINKS_BEFORE*CURSOR_DUR;
 
         setText("");
         mHandler.removeCallbacks(characterAdder);
