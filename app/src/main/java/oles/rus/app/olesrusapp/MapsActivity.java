@@ -1,17 +1,24 @@
 package oles.rus.app.olesrusapp;
 
-import android.support.v4.app.FragmentActivity;
+import android.location.Location;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
+public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener, LocationListener
+{
 
     private static MapsActivity mapsActivity;
     // The map from the layout
@@ -21,6 +28,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
 
     private Thread sendThread;
     private Thread recieveThread;
+    private Toast toast;
 
     public MapsActivity()
     {
@@ -29,7 +37,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
@@ -44,7 +53,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
         setUpMapIfNeeded();
     }
@@ -53,9 +63,9 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     protected void onStop()
     {
         super.onStop();
-        if(null != sendThread)
+        if (null != sendThread)
             sendThread.interrupt();
-        if(null != recieveThread)
+        if (null != recieveThread)
             recieveThread.interrupt();
     }
 
@@ -63,25 +73,28 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
      * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
      * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p>
+     * <p/>
      * If it isn't installed {@link SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
      * install/update the Google Play services APK on their device.
-     * <p>
+     * <p/>
      * A user can return to this FragmentActivity after following the prompt and correctly
      * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
      * have been completely destroyed during this process (it is likely that it would only be
      * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
-    private void setUpMapIfNeeded() {
+    private void setUpMapIfNeeded()
+    {
         // Do a null check to confirm that we have not already instantiated the map.
-        if (mMap == null) {
+        if (mMap == null)
+        {
             // Try to obtain the map from the SupportMapFragment.
             mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
                     .getMap();
             // Check if we were successful in obtaining the map.
-            if (mMap != null) {
+            if (mMap != null)
+            {
                 setUpMap();
             }
         }
@@ -90,10 +103,11 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     /**
      * This is where we can add markers or lines, add listeners or move the camera. In this case, we
      * just add a marker near Africa.
-     * <p>
+     * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
-    private void setUpMap() {
+    private void setUpMap()
+    {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("0, 0"));
 
         // Enables the blue circle at the users current location
@@ -106,15 +120,30 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     @Override
     public void onConnected(Bundle bundle)
     {
-        // Gets the position of the client
-        LatLng myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
-        // Adds a marker at the position of the client
-        mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
+        Log.i("OlesRusApp", Build.PRODUCT);
+        if (Build.PRODUCT.contains("sdk"))
+        {
+            mLocationClient.setMockMode(true);
+            Location loc = new Location("flp");
+            loc.setLatitude(10.1410952);
+            loc.setLongitude(56.1714126);
+            loc.setAccuracy(3.0f);
+            mLocationClient.setMockLocation(loc);
+            mLocationClient.setMockLocation(loc);
+            mLocationClient.setMockLocation(loc);
 
-        sendThread = new Thread(new SendThread(mLocationClient));
-        sendThread.start();
-        recieveThread = new Thread(new RecieveThread());
-        recieveThread.start();
+        }
+        LocationRequest locationRequest = LocationRequest.create();
+        locationRequest.setFastestInterval(500);
+        locationRequest.setInterval(5000);
+        locationRequest.setNumUpdates(1);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        mLocationClient.requestLocationUpdates(locationRequest, this);
+        // Gets the position of the client
+        this.toast = Toast.makeText(this, "Finding location", Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
     @Override
@@ -127,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult)
     {
-
+        Toast.makeText(this, "We couldn't connect. Try again.", Toast.LENGTH_SHORT).show();
     }
 
     public GoogleMap getMap()
@@ -138,5 +167,22 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     public static MapsActivity getMapsActivity()
     {
         return mapsActivity;
+    }
+
+    @Override
+    public void onLocationChanged(Location loc)
+    {
+        toast.cancel();
+        LatLng myPos = new LatLng(
+                loc.getLatitude(),
+                loc.getLongitude()
+        );
+        // Adds a marker at the position of the client
+        mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
+
+        sendThread = new Thread(new SendThread(mLocationClient));
+        sendThread.start();
+        recieveThread = new Thread(new RecieveThread());
+        recieveThread.start();
     }
 }

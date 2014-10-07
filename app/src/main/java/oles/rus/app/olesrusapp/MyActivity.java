@@ -49,7 +49,7 @@ public class MyActivity extends Activity {
 
         Log.i("OlesRusApp", new LoginCom().execute(message).toString());
 
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, ScanningActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
