@@ -21,7 +21,9 @@ public class MyActivity extends Activity {
 
         Typewriter typewriter = (Typewriter) findViewById(R.id.typeWriter);
 //        typewriter.setCharacterDelay(150);
-        typewriter.animateText("Hello World.\nHow are you?");
+//        typewriter.animateText("Hello World.\nHow are you?");
+        typewriter.animateText("Hello World.\n" +
+                "How are you?");
     }
 
 
