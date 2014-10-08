@@ -17,21 +17,51 @@
 
     <ImageView
         android:id="@+id/avatar1"
-        android:src="@drawable/avatar1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/a1"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_below="@id/name"
-        android:onClick="selectAvatar1"
+        android:onClick="selectAvatar"
         />
 
     <ImageView
         android:id="@+id/avatar2"
-        android:src="@drawable/avatar2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/a2"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
         android:layout_toRightOf="@id/avatar1"
         android:layout_below="@id/name"
-        android:onClick="selectAvatar2"
+        android:onClick="selectAvatar"
+        />
+
+    <ImageView
+        android:id="@+id/avatar3"
+        android:src="@drawable/a3"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_toRightOf="@id/avatar2"
+        android:layout_below="@id/name"
+        android:onClick="selectAvatar"
+        />
+
+    <ImageView
+        android:id="@+id/avatar4"
+        android:src="@drawable/a4"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_toRightOf="@id/avatar3"
+        android:layout_below="@id/name"
+        android:onClick="selectAvatar"
+        />
+
+    <ImageView
+        android:id="@+id/avatar5"
+        android:src="@drawable/a5"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:layout_toRightOf="@id/avatar4"
+        android:layout_below="@id/name"
+        android:onClick="selectAvatar"
         />
 
     <Button
@@ -40,7 +70,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/avatar1"
-        android:onClick="selectAvatar"
+        android:onClick="sendSelectAvatar"
         />
 
 </RelativeLayout>

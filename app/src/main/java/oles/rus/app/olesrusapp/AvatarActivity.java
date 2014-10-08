@@ -97,6 +97,19 @@ public class AvatarActivity extends Activity {
 
     public void selectAvatar(View view)
     {
+        avatarNumber = view.getId();
+
+        ((ImageView) findViewById(R.id.avatar1)).setAlpha(1f);
+        ((ImageView) findViewById(R.id.avatar2)).setAlpha(1f);
+        ((ImageView) findViewById(R.id.avatar3)).setAlpha(1f);
+        ((ImageView) findViewById(R.id.avatar4)).setAlpha(1f);
+        ((ImageView) findViewById(R.id.avatar5)).setAlpha(1f);
+
+        view.setAlpha(0.5f);
+    }
+
+    public void sendSelectAvatar(View view)
+    {
         //TODO: Set the avatar. Maybe send to the server?
 
         //TODO: Go to next activity
