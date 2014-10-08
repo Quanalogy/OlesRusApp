@@ -2,10 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="oles.rus.app.olesrusapp.Introduction2Activity">
+    tools:context="oles.rus.app.olesrusapp.Mission1Activity">
 
     <oles.rus.app.olesrusapp.Typewriter
-        android:id="@+id/introduction_terminal"
+        android:id="@+id/mission1intro"
         android:typeface="monospace"
         android:textColor="@color/green"
         android:background="@color/black"

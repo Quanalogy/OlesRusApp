@@ -66,6 +66,26 @@
             android:name=".Introduction2Activity"
             android:label="@string/title_activity_introduction" >
         </activity>
+        <activity
+            android:name=".BrotherDialogActivity"
+            android:label="@string/title_activity_brother_dialog" >
+        </activity>
+        <activity
+            android:name=".BrotherDialog2Activity"
+            android:label="@string/title_activity_brother_dialog2" >
+        </activity>
+        <activity
+            android:name=".Mission1Activity"
+            android:label="@string/title_activity_mission1" >
+        </activity>
+        <activity
+            android:name=".Mission1_2Activity"
+            android:label="@string/title_activity_mission1_2" >
+        </activity>
+        <activity
+            android:name=".Mission1_3Activity"
+            android:label="@string/title_activity_mission1_3" >
+        </activity>
     </application>
 
 </manifest>

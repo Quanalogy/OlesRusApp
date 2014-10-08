@@ -25,7 +25,8 @@ public class FindBrotherThread implements Runnable
         LatLng myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
 
         boolean brotherNotFound = true;
-        final LatLng brotherPos = new LatLng(56.1718517, 10.1885695);
+//        final LatLng brotherPos = new LatLng(56.1718517, 10.1885695);
+        final LatLng brotherPos = new LatLng(56.1550949, 10.1323995);
         final ArrayList<Marker> brotherMarker = new ArrayList<Marker>(); // = mMap.addMarker(new MarkerOptions().title("Brors position").position(brotherPos).visible(false));
 
         Handler handler = new Handler(Looper.getMainLooper());
@@ -66,8 +67,10 @@ public class FindBrotherThread implements Runnable
                 });
             }
 
-            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 10)
+            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 20)
             {
+                System.out.println("I have found my brother");
+                brotherNotFound = false;
                 FindBrotherActivity.getFindBrotherActivity().nextActivity();
             }
 

@@ -8,18 +8,26 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class Introduction2Activity extends Activity {
+public class BrotherDialogActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_introduction2);
+        setContentView(R.layout.activity_brother_dialog);
 
-        Typewriter typewriter = (Typewriter) findViewById(R.id.introduction_terminal);
+        Typewriter typewriter = (Typewriter) findViewById(R.id.brotherTypeWriter);
 
         typewriter.setCharacterDelay(75);
         typewriter.animateText(
-                        "“For at finde din broder skal du løbe rundt i Katrinebjerg-området. Du vil kunne se ham på dit kort, når du er indenfor 50m af ham.”"
+                "*Du fanger din bror //brors navn*\n" +
+                "\n" +
+                "“Jeg er tvunget til at tilfangetage dig, da jeg ellers vil blive henrettet for mine forbrydelser. “\n" +
+                "\n" +
+                "Bror: “Nej, Stop! Du kan tage med os, Katrinebjerggruppen, som du en gang var en del af!”\n" +
+                "\n" +
+                "“Men jeg har en chip i armen, så MfS altid kan finde mig igen!”\n" +
+                "\n" +
+                "Bror: “Vores forskningsgruppe har fundet en måde at deaktivere dem på. Hvis du slipper mig fri kan du blive en del af os igen og få deaktiveret chippen!”\n"
         );
     }
 
@@ -27,7 +35,7 @@ public class Introduction2Activity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.introduction, menu);
+        getMenuInflater().inflate(R.menu.brother_dialog, menu);
         return true;
     }
 
@@ -45,31 +53,7 @@ public class Introduction2Activity extends Activity {
 
     public void goOn(View view)
     {
-        Typewriter typewriter = (Typewriter) findViewById(R.id.introduction_terminal);
-//        typewriter.setCharacterDelay(0);
-        typewriter.finish();
-
-//        int i = 1000;
-//        while (i > 0)
-//        {
-//            try
-//            {
-//                Thread.sleep(1);
-//            } catch (InterruptedException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
-
-        try
-        {
-            Thread.sleep(1000);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-
-        Intent intent = new Intent(this, FindBrotherActivity.class);
+        Intent intent = new Intent(this, BrotherDialog2Activity.class);
         startActivity(intent);
     }
 }

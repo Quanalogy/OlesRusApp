@@ -18,5 +18,10 @@
     <string name="title_activity_avatar">AvatarActivity</string>
     <string name="title_activity_introduction">IntroductionActivity</string>
     <string name="title_activity_find_brother_intro">FindBrotherIntroActivity</string>
+    <string name="title_activity_brother_dialog">BrotherDialogActivity</string>
+    <string name="title_activity_brother_dialog2">BrotherDialog2Activity</string>
+    <string name="title_activity_mission1">Mission1Activity</string>
+    <string name="title_activity_mission1_2">Mission1_2Activity</string>
+    <string name="title_activity_mission1_3">Mission1_3Activity</string>
 
 </resources>

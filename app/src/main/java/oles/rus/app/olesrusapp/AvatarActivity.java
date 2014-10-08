@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.concurrent.ExecutionException;
 
 
@@ -110,9 +113,36 @@ public class AvatarActivity extends Activity {
 
     public void sendSelectAvatar(View view)
     {
-        //TODO: Set the avatar. Maybe send to the server?
+        //Set the avatar. Maybe send to the server?
+        try
+        {
+            int avatar = 0;
+            switch (avatarNumber)
+            {
+                case R.id.avatar1:
+                    avatar = 1;
+                    break;
+                case R.id.avatar2:
+                    avatar = 2;
+                    break;
+                case R.id.avatar3:
+                    avatar = 3;
+                    break;
+                case R.id.avatar4:
+                    avatar = 4;
+                    break;
+                case R.id.avatar5:
+                    avatar = 5;
+                    break;
+            }
+            JSONObject jsonObject = new JSONObject("{\"userId\":" + user.getUserId() + ",\"avatar\":" + avatar + "}");
+            new AvatarSelectCom().execute(jsonObject);
+        } catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
 
-        //TODO: Go to next activity
+        //Go to next activity
         Intent intent = new Intent(this, IntroductionActivity.class);
         startActivity(intent);
     }

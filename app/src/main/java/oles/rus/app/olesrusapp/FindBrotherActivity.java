@@ -1,5 +1,6 @@
 package oles.rus.app.olesrusapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -128,6 +129,8 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
     {
         //TODO: Go the the next activity
             // Brother-dialog (Terminal-based)
+        Intent intent = new Intent(this, BrotherDialogActivity.class);
+        startActivity(intent);
     }
 
     @Override

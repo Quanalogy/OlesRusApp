@@ -8,18 +8,18 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class Introduction2Activity extends Activity {
+public class Mission1Activity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_introduction2);
+        setContentView(R.layout.activity_mission1);
 
-        Typewriter typewriter = (Typewriter) findViewById(R.id.introduction_terminal);
-
+        Typewriter typewriter = (Typewriter) findViewById(R.id.mission1intro);
         typewriter.setCharacterDelay(75);
         typewriter.animateText(
-                        "“For at finde din broder skal du løbe rundt i Katrinebjerg-området. Du vil kunne se ham på dit kort, når du er indenfor 50m af ham.”"
+                "Du er blevet udvalgt til at være rationeringsansvarlig for Katrinebjerggruppen, du skal derfor gå til rationeringscentralen og hente drikkevare, så dit taskforce kan overleve på jeres hårde og udfordrende missioner.\n" +
+                "Når du har fundet drikkevarer skal du scanne dem med telefonen, før du køber dem.\n"
         );
     }
 
@@ -27,7 +27,7 @@ public class Introduction2Activity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.introduction, menu);
+        getMenuInflater().inflate(R.menu.mission1, menu);
         return true;
     }
 
@@ -45,31 +45,7 @@ public class Introduction2Activity extends Activity {
 
     public void goOn(View view)
     {
-        Typewriter typewriter = (Typewriter) findViewById(R.id.introduction_terminal);
-//        typewriter.setCharacterDelay(0);
-        typewriter.finish();
-
-//        int i = 1000;
-//        while (i > 0)
-//        {
-//            try
-//            {
-//                Thread.sleep(1);
-//            } catch (InterruptedException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
-
-        try
-        {
-            Thread.sleep(1000);
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-
-        Intent intent = new Intent(this, FindBrotherActivity.class);
+        Intent intent = new Intent(this, Mission1_2Activity.class);
         startActivity(intent);
     }
 }
