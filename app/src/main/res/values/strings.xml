@@ -24,5 +24,11 @@
     <string name="title_activity_mission1_2">Mission1_2Activity</string>
     <string name="title_activity_mission1_3">Mission1_3Activity</string>
     <string name="title_activity_mission1_4">Mission1_4Activity</string>
+    <string name="title_activity_mission2">Mission2Activity</string>
+    <string name="title_activity_mission2_1">Mission2_1Activity</string>
+    <string name="title_activity_mission2_2">Mission2_2Activity</string>
+    <string name="title_activity_mission2_3">Mission2_3Activity</string>
+    <string name="title_activity_mission2_4">Mission2_4Activity</string>
+    <string name="title_activity_mission2_5">Mission2_5Activity</string>
 
 </resources>

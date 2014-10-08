@@ -8,17 +8,17 @@ import android.view.MenuItem;
 import android.view.View;
 
 
-public class Mission1_4Activity extends Activity {
+public class Mission2_2Activity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mission1_4);
+        setContentView(R.layout.activity_mission2_2);
 
-        Typewriter typewriter = (Typewriter) findViewById(R.id.mission1outro);
+        Typewriter typewriter = (Typewriter) findViewById(R.id.mission2_2);
         typewriter.setCharacterDelay(75);
         typewriter.animateText(
-                "“Tillykke! Du har fundet Sodavand. Find tilbage til basen og meld dig ved Taskforce Alfa”\n"
+                "“Ved printeren ved lokale 0xx(indsæt rigtig lokalenr), skal du scanne QR-koden for at for at hacke på første niveau og ved lokale 1xx (informationskontoret), skal du scanne QR-koden for at hacke på andet niveau af bygningen.” \n"
         );
     }
 
@@ -26,7 +26,7 @@ public class Mission1_4Activity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.mission1_4, menu);
+        getMenuInflater().inflate(R.menu.mission2_2, menu);
         return true;
     }
 
@@ -44,7 +44,7 @@ public class Mission1_4Activity extends Activity {
 
     public void goOn(View view)
     {
-        Intent intent = new Intent(this, Mission2Activity.class);
+        Intent intent = new Intent(this, Mission2_3Activity.class);
         startActivity(intent);
     }
 }

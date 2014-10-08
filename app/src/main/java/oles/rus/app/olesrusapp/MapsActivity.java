@@ -21,6 +21,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     // Object used to get the current location
     private LocationClient mLocationClient;
+    public static final LatLng ADA = new LatLng(56.155454, 10.1317073);
 
     private Thread sendThread;
     private Thread recieveThread;
@@ -163,5 +164,14 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     public static User getUser()
     {
         return user;
+    }
+
+    public void nextActivity()
+    {
+        sendThread.interrupt();
+        recieveThread.interrupt();
+
+        Intent intent = new Intent(this, Mission2_1Activity.class);
+        startActivity(intent);
     }
 }

@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="oles.rus.app.olesrusapp.Mission2_4Activity">
+
+    <oles.rus.app.olesrusapp.Typewriter
+        android:id="@+id/mission2_4"
+        android:typeface="monospace"
+        android:textColor="@color/green"
+        android:background="@color/black"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="1"
+        />
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        />
+
+    <Button
+        android:text="Svar"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_weight="4"
+        android:onClick="goOn"
+        />
+
+</LinearLayout>

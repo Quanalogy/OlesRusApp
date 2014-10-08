@@ -90,6 +90,30 @@
             android:name=".Mission1_4Activity"
             android:label="@string/title_activity_mission1_4" >
         </activity>
+        <activity
+            android:name=".Mission2Activity"
+            android:label="@string/title_activity_mission2" >
+        </activity>
+        <activity
+            android:name=".Mission2_1Activity"
+            android:label="@string/title_activity_mission2_1" >
+        </activity>
+        <activity
+            android:name=".Mission2_2Activity"
+            android:label="@string/title_activity_mission2_2" >
+        </activity>
+        <activity
+            android:name=".Mission2_3Activity"
+            android:label="@string/title_activity_mission2_3" >
+        </activity>
+        <activity
+            android:name=".Mission2_4Activity"
+            android:label="@string/title_activity_mission2_4" >
+        </activity>
+        <activity
+            android:name=".Mission2_5Activity"
+            android:label="@string/title_activity_mission2_5" >
+        </activity>
     </application>
 
 </manifest>
