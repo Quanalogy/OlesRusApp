@@ -23,36 +23,20 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by borimino on 10/2/14.
  */
-public class LoginCom extends AsyncTask<String, Void, User>
+public class SendPosCom extends AsyncTask<JSONObject, Void, Void>
 {
     private static StringBuilder stringBuilder = new StringBuilder();
     private static String baseURL = "http://pvc.archan.dk/";
+    private static User user;
 
-    public static User login(String studynumber)
+    public static User login(JSONObject jsonObject)
     {
-        try
-        {
-
-            //TODO: Validate studynumber
-
-            //Send studynumber to server
-            JSONObject jsonStudynumber = new JSONObject();
-            jsonStudynumber.put("rusNumber", Integer.parseInt(studynumber));
-            JSONObject jsonUser = sendToUrl("login", jsonStudynumber);
-
-            //Return User
-            User user = new User(Integer.parseInt(jsonUser.get("userId").toString()), Integer.parseInt(jsonUser.get("groupId").toString()));
-            return user;
-
-        } catch (JSONException e)
-        {
-            Log.e("OlesRusApp", e.toString());
-        }
+        sendToUrl("navigation/log", jsonObject);
 
         return null;
     }
 
-    private static JSONObject sendToUrl(String addedURL, JSONObject params)
+    private static void sendToUrl(String addedURL, JSONObject params)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
@@ -69,8 +53,9 @@ public class LoginCom extends AsyncTask<String, Void, User>
             {
                 InputStream inputStream = entity.getContent();
                 String result = convertStreamToString(inputStream);
-                JSONObject jsonObject = new JSONObject(result);
-                return jsonObject;
+//                System.out.println("Result " + result);
+//                JSONObject jsonObject = new JSONObject(result);
+//                return jsonObject;
             }
 
 
@@ -83,12 +68,12 @@ public class LoginCom extends AsyncTask<String, Void, User>
         } catch (IOException e)
         {
             Log.e("OlesRusApp", e.toString());
-        } catch (JSONException e)
-        {
-            Log.e("OlesRusApp", e.toString());
+//        } catch (JSONException e)
+//        {
+//            Log.e("OlesRusApp", e.toString());
         }
 
-        return null;
+//        return null;
     }
 
     private static String convertStreamToString(InputStream is) {
@@ -114,8 +99,9 @@ public class LoginCom extends AsyncTask<String, Void, User>
     }
 
     @Override
-    protected User doInBackground(String... strings)
+    protected Void doInBackground(JSONObject... jsonObjects)
     {
-        return LoginCom.login(strings[0]);
+        SendPosCom.login(jsonObjects[0]);
+        return null;
     }
 }

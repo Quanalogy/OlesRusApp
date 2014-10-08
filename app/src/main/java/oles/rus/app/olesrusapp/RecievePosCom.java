@@ -8,9 +8,11 @@ import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,41 +25,28 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by borimino on 10/2/14.
  */
-public class LoginCom extends AsyncTask<String, Void, User>
+public class RecievePosCom extends AsyncTask<Void, Void, JSONArray>
 {
     private static StringBuilder stringBuilder = new StringBuilder();
     private static String baseURL = "http://pvc.archan.dk/";
+    private static User user;
 
-    public static User login(String studynumber)
+    public static JSONArray login()
     {
-        try
-        {
+        JSONArray jsonUser = sendToUrl("navigation", new JSONObject());
 
-            //TODO: Validate studynumber
+        Log.i("OlesRusApp", jsonUser.toString());
 
-            //Send studynumber to server
-            JSONObject jsonStudynumber = new JSONObject();
-            jsonStudynumber.put("rusNumber", Integer.parseInt(studynumber));
-            JSONObject jsonUser = sendToUrl("login", jsonStudynumber);
-
-            //Return User
-            User user = new User(Integer.parseInt(jsonUser.get("userId").toString()), Integer.parseInt(jsonUser.get("groupId").toString()));
-            return user;
-
-        } catch (JSONException e)
-        {
-            Log.e("OlesRusApp", e.toString());
-        }
-
-        return null;
+        return jsonUser;
     }
 
-    private static JSONObject sendToUrl(String addedURL, JSONObject params)
+    private static JSONArray sendToUrl(String addedURL, JSONObject params)
     {
         HttpClient httpClient = new DefaultHttpClient();
 
         try {
             HttpPost request = new HttpPost(baseURL + addedURL);
+//            HttpGet request = new HttpGet(baseURL + addedURL);
             StringEntity params2 = new StringEntity(params.toString());
             request.addHeader("content-type", "application/json");
             request.setEntity(params2);
@@ -69,7 +58,8 @@ public class LoginCom extends AsyncTask<String, Void, User>
             {
                 InputStream inputStream = entity.getContent();
                 String result = convertStreamToString(inputStream);
-                JSONObject jsonObject = new JSONObject(result);
+//                System.out.println("Result " + result); //DEBUG
+                JSONArray jsonObject = new JSONArray(result);
                 return jsonObject;
             }
 
@@ -114,8 +104,9 @@ public class LoginCom extends AsyncTask<String, Void, User>
     }
 
     @Override
-    protected User doInBackground(String... strings)
+    protected JSONArray doInBackground(Void... params)
     {
-        return LoginCom.login(strings[0]);
+        return RecievePosCom.login();
     }
+
 }

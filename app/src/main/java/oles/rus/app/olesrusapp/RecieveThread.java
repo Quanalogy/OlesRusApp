@@ -12,8 +12,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by borimino on 9/23/14.
@@ -39,23 +41,33 @@ public class RecieveThread implements Runnable
             try
             {
                 tmp = new JSONArray("[{\"userId\":1, \"type\": \"leader\", \"currentPoint\":{\"lat\":10, \"lng\":10}},{\"userId\":3, \"type\": \"leader\", \"currentPoint\":{\"lat\":10, \"lng\":10}}]");
+                tmp = new RecievePosCom().execute().get();
+                System.out.println(tmp);
             } catch (JSONException e)
             {
                 Log.e("OlesRusApp", e.toString());
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            } catch (ExecutionException e)
+            {
+                e.printStackTrace();
             }
 
-            HashMap<Integer, LatLng> locations = new HashMap<Integer, LatLng>();
+//            HashMap<Integer, LatLng> locations = new HashMap<Integer, LatLng>();
+            ArrayList<LatLng> locations = new ArrayList<LatLng>();
 
             for (int i = 0; i < tmp.length(); i++)
             {
                 try
                 {
                     JSONObject jsonObject = tmp.getJSONObject(i);
-                    int id = jsonObject.getInt("userId");
-                    int lat = jsonObject.getInt("lat");
-                    int lng = jsonObject.getInt("lng");
+//                    int id = jsonObject.getInt("id");
+                    float lat = Float.parseFloat(jsonObject.get("lat").toString());
+                    float lng = Float.parseFloat(jsonObject.get("lng").toString());
                     LatLng latLng = new LatLng(lat, lng);
-                    locations.put(id, latLng);
+//                    locations.put(id, latLng);
+                    locations.add(latLng);
                 } catch (JSONException e)
                 {
                     Log.e("OlesRusApp", e.toString());
@@ -86,7 +98,29 @@ public class RecieveThread implements Runnable
 //            for (int i = 0; i < locations.size(); i++)
 //            {
 //                final int id = locations.keySet().get(i);
-            for (int id : locations.keySet())
+
+            Handler handler = new Handler(Looper.getMainLooper());
+            handler.post(new Runnable()
+            {
+                @Override
+                public void run()
+                {
+                    MapsActivity.getMapsActivity().getMap().clear();
+                }
+            });
+            for (final LatLng latLng : locations)
+            {
+                Handler handler2 = new Handler(Looper.getMainLooper());
+                handler2.post(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        MapsActivity.getMapsActivity().getMap().addMarker(new MarkerOptions().position(latLng));
+                    }
+                });
+            }
+/*            for (int id : locations.keySet())
             {
                 final int Id = id;
 //                final int j = i;
@@ -120,7 +154,7 @@ public class RecieveThread implements Runnable
                     }
                 });
 //                m.setPosition(locations.get(i));
-            }
+            }*/
 
             // Sleep
             try {
