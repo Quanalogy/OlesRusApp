@@ -27,7 +27,6 @@ public class LoginCom extends AsyncTask<String, Void, User>
 {
     private static StringBuilder stringBuilder = new StringBuilder();
     private static String baseURL = "http://pvc.archan.dk/";
-    private static User user;
 
     public static User login(String studynumber)
     {
@@ -41,11 +40,8 @@ public class LoginCom extends AsyncTask<String, Void, User>
             jsonStudynumber.put("rusNumber", Integer.parseInt(studynumber));
             JSONObject jsonUser = sendToUrl("login", jsonStudynumber);
 
-            Log.i("OlesRusApp", jsonUser.toString());
-
             //Return User
-            user = new User(Integer.parseInt(jsonUser.get("id").toString()), jsonUser.getString("name").toString());
-//            AvatarActivity.setUser(user);
+            User user = new User(Integer.parseInt(jsonUser.get("userId").toString()), Integer.parseInt(jsonUser.get("groupId").toString()));
             return user;
 
         } catch (JSONException e)
@@ -73,7 +69,6 @@ public class LoginCom extends AsyncTask<String, Void, User>
             {
                 InputStream inputStream = entity.getContent();
                 String result = convertStreamToString(inputStream);
-                System.out.println(result); //DEBUG
                 JSONObject jsonObject = new JSONObject(result);
                 return jsonObject;
             }
@@ -122,12 +117,5 @@ public class LoginCom extends AsyncTask<String, Void, User>
     protected User doInBackground(String... strings)
     {
         return LoginCom.login(strings[0]);
-    }
-
-    @Override
-    protected void onPostExecute(User user)
-    {
-        super.onPostExecute(user);
-        AvatarActivity.setUser(user);
     }
 }

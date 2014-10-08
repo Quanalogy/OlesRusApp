@@ -61,7 +61,7 @@ public class MyActivity extends Activity {
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
 
-        Intent intent = new Intent(this, MapsActivity.class);
+        Intent intent = new Intent(this, ScanningActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }

@@ -1,6 +1,5 @@
 package oles.rus.app.olesrusapp;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -11,8 +10,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.util.concurrent.ExecutionException;
 
 public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
 
@@ -25,8 +22,6 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     private Thread sendThread;
     private Thread recieveThread;
 
-    private static User user = new User(0);
-
     public MapsActivity()
     {
         super();
@@ -37,23 +32,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        mLocationClient = new LocationClient(this, this, this);
-
-        Intent intent = getIntent();
-        String studynumber = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
-
-        try
-        {
-            user = new LoginCom().execute(studynumber).get();
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace();
-        }
-
         setUpMapIfNeeded();
+        mLocationClient = new LocationClient(this, this, this);
     }
 
     @Override
@@ -158,10 +138,5 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     public static MapsActivity getMapsActivity()
     {
         return mapsActivity;
-    }
-
-    public static User getUser()
-    {
-        return user;
     }
 }
