@@ -39,6 +39,14 @@
             android:value="@string/google_maps_key" />
 
         <activity
+            android:name=".FindBrotherActivity"
+            android:label="@string/title_activity_maps"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="oles.rus.app.olesrusapp.AvatarActivity" />
+        </activity>
+        <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" >
@@ -52,6 +60,10 @@
         </activity>
         <activity
             android:name=".IntroductionActivity"
+            android:label="@string/title_activity_introduction" >
+        </activity>
+        <activity
+            android:name=".Introduction2Activity"
             android:label="@string/title_activity_introduction" >
         </activity>
     </application>

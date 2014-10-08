@@ -70,4 +70,10 @@ public class Typewriter extends TextView
     public void setCharacterDelay(long millis) {
         mDelay = millis;
     }
+    
+    public void finish()
+    {
+        mIndex = mText.length();
+        setText(mText);
+    }
 }

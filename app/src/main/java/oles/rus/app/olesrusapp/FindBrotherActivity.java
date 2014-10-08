@@ -22,6 +22,7 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
 
     private Thread sendThread;
     private Thread recieveThread;
+    private Thread findBrotherThread;
 
     public FindBrotherActivity()
     {
@@ -54,10 +55,12 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
     protected void onStop()
     {
         super.onStop();
-        if(null != sendThread)
-            sendThread.interrupt();
-        if(null != recieveThread)
-            recieveThread.interrupt();
+//        if(null != sendThread)
+//            sendThread.interrupt();
+//        if(null != recieveThread)
+//            recieveThread.interrupt();
+        if(null != findBrotherThread)
+            findBrotherThread.interrupt();
     }
 
     /**
@@ -95,7 +98,7 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("0, 0"));
+//        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("0, 0"));
 
         // Enables the blue circle at the users current location
         mMap.setMyLocationEnabled(true);
@@ -116,56 +119,23 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
 //        sendThread.start();
 //        recieveThread = new Thread(new RecieveThread());
 //        recieveThread.start();
+        findBrotherThread = new Thread(new FindBrotherThread());
+        findBrotherThread.start();
 
-        boolean brotherNotFound = true;
-        LatLng brotherPos = new LatLng(56.1718517, 10.1885695);
-        Marker brotherMarker = mMap.addMarker(new MarkerOptions().title("Brors position").position(brotherPos).visible(false));
-
-        while (brotherNotFound)
-        {
-            myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
-            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 50)
-            {
-                brotherMarker.setVisible(true);
-            } else
-            {
-                brotherMarker.setVisible(false);
-            }
-
-            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 10)
-            {
-                nextActivity();
-            }
-        }
     }
 
-    private void nextActivity()
+    public void nextActivity()
     {
         //TODO: Go the the next activity
             // Brother-dialog (Terminal-based)
     }
 
-    public float distance (double lat_a, double lng_a, double lat_b, double lng_b )
-    {
-        double earthRadius = 3958.75;
-        double latDiff = Math.toRadians(lat_b-lat_a);
-        double lngDiff = Math.toRadians(lng_b-lng_a);
-        double a = Math.sin(latDiff /2) * Math.sin(latDiff /2) +
-                Math.cos(Math.toRadians(lat_a)) * Math.cos(Math.toRadians(lat_b)) *
-                        Math.sin(lngDiff /2) * Math.sin(lngDiff /2);
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
-        double distance = earthRadius * c;
-
-        int meterConversion = 1609;
-
-        return new Float(distance * meterConversion).floatValue();
-    }
-
     @Override
     public void onDisconnected()
     {
-        sendThread.interrupt();
-        recieveThread.interrupt();
+//        sendThread.interrupt();
+//        recieveThread.interrupt();
+        findBrotherThread.interrupt();
     }
 
     @Override
@@ -179,8 +149,13 @@ public class FindBrotherActivity extends FragmentActivity implements GooglePlayS
         return mMap;
     }
 
-    public static FindBrotherActivity getMapsActivity()
+    public static FindBrotherActivity getFindBrotherActivity()
     {
         return mapsActivity;
+    }
+
+    public LocationClient getmLocationClient()
+    {
+        return mLocationClient;
     }
 }

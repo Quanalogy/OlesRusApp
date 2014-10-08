@@ -17,5 +17,6 @@
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_avatar">AvatarActivity</string>
     <string name="title_activity_introduction">IntroductionActivity</string>
+    <string name="title_activity_find_brother_intro">FindBrotherIntroActivity</string>
 
 </resources>

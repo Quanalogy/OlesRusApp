@@ -113,7 +113,7 @@ public class AvatarActivity extends Activity {
         //TODO: Set the avatar. Maybe send to the server?
 
         //TODO: Go to next activity
-        Intent intent = new Intent(this, FindBrotherActivity.class);
+        Intent intent = new Intent(this, IntroductionActivity.class);
         startActivity(intent);
     }
 }

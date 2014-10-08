@@ -3,5 +3,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/map"
-    tools:context="oles.rus.app.olesrusapp.MapsActivity"
+    tools:context="oles.rus.app.olesrusapp.FindBrotherActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment"/>
