@@ -6,6 +6,8 @@
     <string name="action_settings">Settings</string>
     <string name="text_field_text">Indtast Studienummer</string>
     <string name="sendButton_text">Send</string>
+    <string name="scan">Scan</string>
+    <string name="title_activity_scanning">Scanning</string>
 
     <color name="bg">#0000FF</color>
 
