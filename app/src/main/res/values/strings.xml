@@ -15,5 +15,7 @@
     <!-- <string name="google_maps_key" templateMergeStrategy="preserve">AIzaSyC1Cjkpk5-0h-yXlrjsEerlq2LWfSDwAQ8</string> -->
     <string name="title_activity_map">MapActivity</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_activity_avatar">AvatarActivity</string>
+    <string name="title_activity_introduction">IntroductionActivity</string>
 
 </resources>
