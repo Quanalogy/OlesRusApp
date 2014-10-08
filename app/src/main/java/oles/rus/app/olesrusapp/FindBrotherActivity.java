@@ -1,8 +1,7 @@
 package oles.rus.app.olesrusapp;
 
-import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -10,13 +9,12 @@ import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-import java.util.concurrent.ExecutionException;
+public class FindBrotherActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
 
-public class MapsActivity extends FragmentActivity implements GooglePlayServicesClient.ConnectionCallbacks, GooglePlayServicesClient.OnConnectionFailedListener{
-
-    private static MapsActivity mapsActivity;
+    private static FindBrotherActivity mapsActivity;
     // The map from the layout
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     // Object used to get the current location
@@ -25,9 +23,7 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     private Thread sendThread;
     private Thread recieveThread;
 
-    private static User user = new User(0);
-
-    public MapsActivity()
+    public FindBrotherActivity()
     {
         super();
         mapsActivity = this;
@@ -36,24 +32,9 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        mLocationClient = new LocationClient(this, this, this);
-
-        Intent intent = getIntent();
-        String studynumber = intent.getStringExtra(MyActivity.EXTRA_MESSAGE);
-
-        try
-        {
-            user = new LoginCom().execute(studynumber).get();
-        } catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        } catch (ExecutionException e)
-        {
-            e.printStackTrace();
-        }
-
+        setContentView(R.layout.activity_find_brother);
         setUpMapIfNeeded();
+        mLocationClient = new LocationClient(this, this, this);
     }
 
     @Override
@@ -84,14 +65,14 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
      * installed) and the map has not already been instantiated.. This will ensure that we only ever
      * call {@link #setUpMap()} once when {@link #mMap} is not null.
      * <p>
-     * If it isn't installed {@link SupportMapFragment} (and
+     * If it isn't installed {@link com.google.android.gms.maps.SupportMapFragment} (and
      * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
      * install/update the Google Play services APK on their device.
      * <p>
      * A user can return to this FragmentActivity after following the prompt and correctly
      * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
      * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
+     * stopped or paused), {@link #onCreate(android.os.Bundle)} may not be called again so we should call this
      * method in {@link #onResume()} to guarantee that it will be called.
      */
     private void setUpMapIfNeeded() {
@@ -129,12 +110,55 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         // Gets the position of the client
         LatLng myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
         // Adds a marker at the position of the client
-        mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
+//        mMap.addMarker(new MarkerOptions().position(myPos).title("My position"));
 
-        sendThread = new Thread(new SendThread(mLocationClient));
-        sendThread.start();
-        recieveThread = new Thread(new RecieveThread());
-        recieveThread.start();
+//        sendThread = new Thread(new SendThread(mLocationClient));
+//        sendThread.start();
+//        recieveThread = new Thread(new RecieveThread());
+//        recieveThread.start();
+
+        boolean brotherNotFound = true;
+        LatLng brotherPos = new LatLng(56.1718517, 10.1885695);
+        Marker brotherMarker = mMap.addMarker(new MarkerOptions().title("Brors position").position(brotherPos).visible(false));
+
+        while (brotherNotFound)
+        {
+            myPos = new LatLng(mLocationClient.getLastLocation().getLatitude(), mLocationClient.getLastLocation().getLongitude());
+            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 50)
+            {
+                brotherMarker.setVisible(true);
+            } else
+            {
+                brotherMarker.setVisible(false);
+            }
+
+            if (distance(myPos.latitude, myPos.longitude, brotherPos.latitude, brotherPos.longitude) < 10)
+            {
+                nextActivity();
+            }
+        }
+    }
+
+    private void nextActivity()
+    {
+        //TODO: Go the the next activity
+            // Brother-dialog (Terminal-based)
+    }
+
+    public float distance (double lat_a, double lng_a, double lat_b, double lng_b )
+    {
+        double earthRadius = 3958.75;
+        double latDiff = Math.toRadians(lat_b-lat_a);
+        double lngDiff = Math.toRadians(lng_b-lng_a);
+        double a = Math.sin(latDiff /2) * Math.sin(latDiff /2) +
+                Math.cos(Math.toRadians(lat_a)) * Math.cos(Math.toRadians(lat_b)) *
+                        Math.sin(lngDiff /2) * Math.sin(lngDiff /2);
+        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        double distance = earthRadius * c;
+
+        int meterConversion = 1609;
+
+        return new Float(distance * meterConversion).floatValue();
     }
 
     @Override
@@ -155,13 +179,8 @@ public class MapsActivity extends FragmentActivity implements GooglePlayServices
         return mMap;
     }
 
-    public static MapsActivity getMapsActivity()
+    public static FindBrotherActivity getMapsActivity()
     {
         return mapsActivity;
-    }
-
-    public static User getUser()
-    {
-        return user;
     }
 }

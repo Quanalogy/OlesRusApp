@@ -6,12 +6,27 @@ package oles.rus.app.olesrusapp;
 public class User
 {
     private int userId;
-    private int groupId;
     private String name;
 
-    public User(int userId, int groupId)
+    public User(int userId)
     {
         this.userId = userId;
-        this.groupId = groupId;
+        this.name = "Test Testesen";
+    }
+
+    public User(int userId, String name)
+    {
+        this.userId = userId;
+        this.name = name;
+    }
+
+    public int getUserId()
+    {
+        return userId;
+    }
+
+    public String getName()
+    {
+        return name;
     }
 }

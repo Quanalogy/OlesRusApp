@@ -5,6 +5,9 @@ import android.util.Log;
 
 import com.google.android.gms.location.LocationClient;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by borimino on 9/19/14.
  */
@@ -31,6 +34,15 @@ public class SendThread implements Runnable
 
             // TODO: Send the location
             Log.e("olesApp", lat + ", " + lng);
+            try
+            {
+                JSONObject jsonUser = new JSONObject("{\"userId\":" + MapsActivity.getUser().getUserId() + ",\"point\":{\"lat\":" + lat + ",\"lng\":" + lng + "}}");
+                System.out.println(jsonUser.toString()); //DEBUG
+                new SendPosCom().execute(jsonUser);
+            } catch (JSONException e)
+            {
+                e.printStackTrace();
+            }
 
             // Sleep
             try {

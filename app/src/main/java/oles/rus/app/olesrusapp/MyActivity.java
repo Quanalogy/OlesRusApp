@@ -49,7 +49,17 @@ public class MyActivity extends Activity {
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
 
-        Log.i("OlesRusApp", new LoginCom().execute(message).toString());
+//        Log.i("OlesRusApp", (new LoginCom()).execute(message).toString());
+
+        Intent intent = new Intent(this, AvatarActivity.class);
+        intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
+
+    public void openMap(View view)
+    {
+        EditText studynumber = (EditText) findViewById(R.id.studyNumber);
+        String message = studynumber.getText().toString();
 
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
