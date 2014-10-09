@@ -15,7 +15,8 @@ public class MyActivity extends Activity
     public final static String EXTRA_MESSAGE = "oles.rus.app.olesrusapp.MESSAGE";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my);
 
@@ -28,14 +29,16 @@ public class MyActivity extends Activity
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.my, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -46,6 +49,7 @@ public class MyActivity extends Activity
     public void sendStudyNumber(View view)
     {
         // TODO: Validate the studynumber. Go to the map-view.
+
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
 
@@ -61,9 +65,9 @@ public class MyActivity extends Activity
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
 
-        Intent intent = new Intent(this, Mission2_5Activity.class);
+        Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
-        finish();
+
         startActivity(intent);
     }
 }
