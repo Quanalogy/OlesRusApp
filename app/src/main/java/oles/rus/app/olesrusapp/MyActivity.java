@@ -58,7 +58,7 @@ public class MyActivity extends Activity
 
         if (message.equals(""))
         {
-            Toast.makeText(getApplicationContext(), "Du bør lige skrive dit studienummer", Toast.LENGTH_SHORT);
+            Toast.makeText(getApplicationContext(), "Du bør lige skrive dit studienummer", Toast.LENGTH_SHORT).show();
             return;
         }
 
