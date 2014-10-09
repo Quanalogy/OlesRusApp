@@ -23,13 +23,13 @@ import java.io.UnsupportedEncodingException;
 /**
  * Created by borimino on 10/2/14.
  */
-public class ScoreGetCom extends AsyncTask<Void, Void, Integer>
+public class ScoreGetCom extends AsyncTask<Void, Void, Float>
 {
     private static StringBuilder stringBuilder = new StringBuilder();
     private static String baseURL = "http://pvc.archan.dk/";
-    private static User user;
+//    private static User user;
 
-    public static Integer login()
+    public static float getScore()
     {
         try
         {
@@ -44,16 +44,16 @@ public class ScoreGetCom extends AsyncTask<Void, Void, Integer>
             Log.i("OlesRusApp", jsonUser.toString());
 
             //Return User
-            user = new User(Integer.parseInt(jsonUser.get("id").toString()), jsonUser.getString("name").toString());
+//            user = new User(Integer.parseInt(jsonUser.get("id").toString()), jsonUser.getString("name").toString());
 //            AvatarActivity.setUser(user);
-            return 0;
+            return (float) jsonUser.getDouble("percent");
 
         } catch (JSONException e)
         {
             Log.e("OlesRusApp", e.toString());
         }
 
-        return null;
+        return 0.5f;
     }
 
     private static JSONObject sendToUrl(String addedURL)
@@ -119,8 +119,8 @@ public class ScoreGetCom extends AsyncTask<Void, Void, Integer>
     }
 
     @Override
-    protected Integer doInBackground(Void... voids)
+    protected Float doInBackground(Void... voids)
     {
-        return ScoreGetCom.login();
+        return ScoreGetCom.getScore();
     }
 }
