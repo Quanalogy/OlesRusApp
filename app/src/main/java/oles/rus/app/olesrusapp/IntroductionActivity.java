@@ -72,6 +72,7 @@ public class IntroductionActivity extends Activity {
         }
 
         Intent intent = new Intent(this, Introduction2Activity.class);
+        finish();
         startActivity(intent);
     }
 }

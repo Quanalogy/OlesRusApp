@@ -70,6 +70,7 @@ public class Introduction2Activity extends Activity {
         }
 
         Intent intent = new Intent(this, FindBrotherActivity.class);
+        finish();
         startActivity(intent);
     }
 }

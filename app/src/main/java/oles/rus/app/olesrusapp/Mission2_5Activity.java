@@ -1,17 +1,19 @@
 package oles.rus.app.olesrusapp;
-
-import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.badlogic.gdx.backends.android.AndroidApplication;
+import com.mygdx.game.graphicsDemo;
 
-public class Mission2_5Activity extends Activity {
+
+public class Mission2_5Activity extends AndroidApplication
+{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mission2_5);
+        initialize(new graphicsDemo());
     }
 
 
