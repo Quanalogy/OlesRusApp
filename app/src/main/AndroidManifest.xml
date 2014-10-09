@@ -112,7 +112,10 @@
         </activity>
         <activity
             android:name=".Mission2_5Activity"
-            android:label="@string/title_activity_mission2_5" >
+            android:label="@string/title_activity_mission2_5"
+            android:screenOrientation="portrait"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+            >
         </activity>
     </application>
 
