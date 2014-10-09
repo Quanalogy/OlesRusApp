@@ -26,9 +26,10 @@ public class MyActivity extends Activity
         Typewriter typewriter = (Typewriter) findViewById(R.id.typeWriter);
 //        typewriter.setCharacterDelay(150);
 //        typewriter.animateText("Hello World.\nHow are you?");
-        typewriter.animateText("Hello World.\n" +
-                "How are you?");
-
+        typewriter.animateText(
+                "Velkommen til Oles Rus App.\n" +
+                "Du bedes indtaste dit studienummer i feltet ovenfor.\n"
+        );
         LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         if (!statusOfGPS)
@@ -62,6 +63,12 @@ public class MyActivity extends Activity
 
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
+
+        if (message.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Du bør lige skrive dit studienummer", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
 //        Log.i("OlesRusApp", (new LoginCom()).execute(message).toString());
 

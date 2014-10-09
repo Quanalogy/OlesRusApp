@@ -18,7 +18,7 @@ public class Mission2_2Activity extends Activity {
         Typewriter typewriter = (Typewriter) findViewById(R.id.mission2_2);
         typewriter.setCharacterDelay(75);
         typewriter.animateText(
-                "“Ved printeren ved lokale 0xx(indsæt rigtig lokalenr), skal du scanne QR-koden for at for at hacke på første niveau og ved lokale 1xx (informationskontoret), skal du scanne QR-koden for at hacke på andet niveau af bygningen.” \n"
+                "“Ved printeren ved lokale 017, skal du scanne QR-koden for at for at hacke på første niveau og ved lokale 122, skal du scanne QR-koden for at hacke på andet niveau af bygningen.” \n"
         );
     }
 

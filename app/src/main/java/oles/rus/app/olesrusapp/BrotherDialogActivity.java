@@ -19,7 +19,7 @@ public class BrotherDialogActivity extends Activity {
 
         typewriter.setCharacterDelay(75);
         typewriter.animateText(
-                "*Du fanger din bror //brors navn*\n" +
+                "*Du fanger din bror Michael Jensen*\n" +
                 "\n" +
                 "“Jeg er tvunget til at tilfangetage dig, da jeg ellers vil blive henrettet for mine forbrydelser. “\n" +
                 "\n" +
