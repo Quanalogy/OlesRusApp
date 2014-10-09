@@ -1,8 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="oles.rus.app.olesrusapp.Mission1Activity">
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context="oles.rus.app.olesrusapp.Mission1Activity">
+
+    <oles.rus.app.olesrusapp.ActionBar
+        android:layout_width="fill_parent"
+        android:layout_height="28dp"
+        android:id="@+id/actionbar"/>
 
     <oles.rus.app.olesrusapp.Typewriter
         android:id="@+id/mission1intro"
@@ -14,5 +19,6 @@
         android:clickable="true"
         android:onClick="goOn"
         />
+
 
 </RelativeLayout>

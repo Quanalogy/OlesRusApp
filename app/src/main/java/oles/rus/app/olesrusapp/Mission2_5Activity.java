@@ -11,25 +11,37 @@ import com.mygdx.game.graphicsDemo;
 
 public class Mission2_5Activity extends AndroidApplication implements Mission2_5ActivityInterface
 {
+    private graphicsDemo game;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new graphicsDemo(this), config);
+        game = new graphicsDemo(this);
+        initialize(game, config);
     }
 
     @Override
     public void WonGame()
     {
+        game.pause();
+        finish();
+        this.runOnUiThread(new Runnable()
+        {
+            public void run()
+            {
+                Toast.makeText(getBaseContext(), "YOU'VE WON THE FUCKING GAME!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
 
     }
 
     @Override
     public void LostGame()
     {
-
     }
 //
 //
