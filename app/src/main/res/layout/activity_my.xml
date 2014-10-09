@@ -32,15 +32,15 @@
         android:onClick="sendStudyNumber"
         />
 
-    <Button
-        android:id="@+id/mapButton"
-        android:text="Open Map"
-        android:layout_below="@id/sendButton"
-        android:layout_alignRight="@id/sendButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openMap"
-        />
+    <!--<Button-->
+        <!--android:id="@+id/mapButton"-->
+        <!--android:text="Open Map"-->
+        <!--android:layout_below="@id/sendButton"-->
+        <!--android:layout_alignRight="@id/sendButton"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:onClick="openMap"-->
+        <!--/>-->
 
     <oles.rus.app.olesrusapp.Typewriter
         android:id="@+id/typeWriter"

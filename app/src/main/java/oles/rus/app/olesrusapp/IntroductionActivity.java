@@ -7,6 +7,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class IntroductionActivity extends Activity {
 
@@ -18,11 +21,17 @@ public class IntroductionActivity extends Activity {
         Typewriter typewriter = (Typewriter) findViewById(R.id.introduction_terminal);
 
         typewriter.setCharacterDelay(75);
-        typewriter.animateText("klokkeslet + Dags dato + 2084:\n" +
+        typewriter.animateText(time_date() + " 2084:\n" +
                         "Afsender: Comrade Ivan Ivanovitch - General Red Army intelligence\n" +
                         "\n" +
-                        "“Vi fra den røde hær har udvalgt dig, //navn, til at undgå din dødsstraf, mod at du fanger din bror //brors navn. Vi har i mange år har forsøgt at fange ham, da han formidler den ulovlige viden! Du udvælges til dette da det er den eneste måde at fange ham på - nu tid til at du, //navn, viser dit værd overfor den røde hær og fanger ham! Klarer du dette belønnes du med optagelse i Ministieriet for Statssikkerhed (MfS) men fejler du, straffes du med døden!”\n"
+                        "“Vi fra den røde hær har udvalgt dig, " + AvatarActivity.getUser().getName() + ", til at undgå din dødsstraf, mod at du fanger din bror Michael Jensen. Vi har i mange år har forsøgt at fange ham, da han formidler den ulovlige viden! Du udvælges til dette da det er den eneste måde at fange ham på - nu tid til at du, " + AvatarActivity.getUser().getName() + ", viser dit værd overfor den røde hær og fanger ham! Klarer du dette belønnes du med optagelse i Ministieriet for Statssikkerhed (MfS) men fejler du, straffes du med døden!”\n"
         );
+    }
+
+    private String time_date()
+    {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH:mm:ss DD/MM");
+        return simpleDateFormat.format(new Date());
     }
 
 

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MyActivity extends Activity
@@ -22,8 +23,10 @@ public class MyActivity extends Activity
         Typewriter typewriter = (Typewriter) findViewById(R.id.typeWriter);
 //        typewriter.setCharacterDelay(150);
 //        typewriter.animateText("Hello World.\nHow are you?");
-        typewriter.animateText("Hello World.\n" +
-                "How are you?");
+        typewriter.animateText(
+                "Velkommen til Oles Rus App.\n" +
+                "Du bedes indtaste dit studienummer i feltet ovenfor.\n"
+        );
     }
 
 
@@ -48,6 +51,12 @@ public class MyActivity extends Activity
         // TODO: Validate the studynumber. Go to the map-view.
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
+
+        if (message.equals(""))
+        {
+            Toast.makeText(getApplicationContext(), "Du bør lige skrive dit studienummer", Toast.LENGTH_SHORT);
+            return;
+        }
 
 //        Log.i("OlesRusApp", (new LoginCom()).execute(message).toString());
 
