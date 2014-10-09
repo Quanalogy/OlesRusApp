@@ -137,6 +137,7 @@ public class AvatarActivity extends Activity {
             }
             JSONObject jsonObject = new JSONObject("{\"userId\":" + user.getUserId() + ",\"avatar\":" + avatar + "}");
             new AvatarSelectCom().execute(jsonObject);
+            user.setAvatar(avatar);
         } catch (JSONException e)
         {
             e.printStackTrace();
