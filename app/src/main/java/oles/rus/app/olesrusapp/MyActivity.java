@@ -1,12 +1,15 @@
 package oles.rus.app.olesrusapp;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class MyActivity extends Activity
@@ -25,6 +28,13 @@ public class MyActivity extends Activity
 //        typewriter.animateText("Hello World.\nHow are you?");
         typewriter.animateText("Hello World.\n" +
                 "How are you?");
+
+        LocationManager manager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean statusOfGPS = manager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (!statusOfGPS)
+        {
+            Toast.makeText(getApplicationContext(), "Please enable gps", Toast.LENGTH_LONG).show();
+        }
     }
 
 
