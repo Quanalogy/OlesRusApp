@@ -21,6 +21,8 @@ public class avatarDemo
     private static final int velX = 3;
     private static final int radius = 15;
     private Wall wall;
+    private boolean dead = false;
+    private boolean won = false;
 
     public boolean isDead()
     {
@@ -30,10 +32,10 @@ public class avatarDemo
     public void reset()
     {
         this.dead = false;
+        this.won = false;
         makeAvatar();
     }
 
-    private boolean dead = false;
 
 
     public avatarDemo(Pixmap pixmap, Wall wall)
@@ -140,15 +142,15 @@ public class avatarDemo
         {
             this.dead = true;
         }
+        if (this.getX() - radius > wall.getX2(3, 0))
+        {
+            this.won = true;
+        }
     }
 
     public boolean isWin()
     {
-        if (this.getX() - radius > wall.getX2(3, 0))
-        {
-            return true;
-        }
-        return false;
+        return this.won;
     }
 
     //Render sørger for alt der skal tegnes

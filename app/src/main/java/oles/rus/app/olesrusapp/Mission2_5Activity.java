@@ -1,15 +1,15 @@
 package oles.rus.app.olesrusapp;
+
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
+import com.mygdx.game.Mission2_5ActivityInterface;
 import com.mygdx.game.graphicsDemo;
 
 
-public class Mission2_5Activity extends AndroidApplication
+public class Mission2_5Activity extends AndroidApplication implements Mission2_5ActivityInterface
 {
 
     @Override
@@ -17,7 +17,19 @@ public class Mission2_5Activity extends AndroidApplication
         super.onCreate(savedInstanceState);
         Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
         AndroidApplicationConfiguration config = new AndroidApplicationConfiguration();
-        initialize(new graphicsDemo(), config);
+        initialize(new graphicsDemo(this), config);
+    }
+
+    @Override
+    public void WonGame()
+    {
+
+    }
+
+    @Override
+    public void LostGame()
+    {
+
     }
 //
 //

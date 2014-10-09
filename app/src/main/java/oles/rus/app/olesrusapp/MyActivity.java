@@ -3,14 +3,14 @@ package oles.rus.app.olesrusapp;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
 
-public class MyActivity extends Activity {
+public class MyActivity extends Activity
+{
 
     public final static String EXTRA_MESSAGE = "oles.rus.app.olesrusapp.MESSAGE";
 
@@ -61,8 +61,9 @@ public class MyActivity extends Activity {
         EditText studynumber = (EditText) findViewById(R.id.studyNumber);
         String message = studynumber.getText().toString();
 
-        Intent intent = new Intent(this, Mission2Activity.class);
+        Intent intent = new Intent(this, Mission2_5Activity.class);
         intent.putExtra(EXTRA_MESSAGE, message);
+        finish();
         startActivity(intent);
     }
 }

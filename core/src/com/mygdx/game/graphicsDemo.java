@@ -21,10 +21,17 @@ public class graphicsDemo implements ApplicationListener
     private Pixmap pixmap;
     private Wall wall;
     private avatarDemo AD;
+    private final Mission2_5ActivityInterface activity;
+
+    public graphicsDemo(Mission2_5ActivityInterface activity)
+    {
+        this.activity = activity;
+    }
 
     @Override
     public void create()
     {
+
 
         batch = new SpriteBatch();
 
@@ -60,7 +67,7 @@ public class graphicsDemo implements ApplicationListener
 
         if (AD.isDead())
         {
-            texture = new Texture("access-denied2.png");
+            texture = new Texture("access_denied2.png");
             sprite = new Sprite(texture);
             sprite.rotate90(true);
             sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
@@ -68,12 +75,15 @@ public class graphicsDemo implements ApplicationListener
             {
                 AD.reset();
             }
+            activity.LostGame();
         } else if (AD.isWin())
         {
-            texture = new Texture("access-granted.png");
+            texture = new Texture("access_granted.png");
             sprite = new Sprite(texture);
             sprite.rotate90(true);
             sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+            activity.WonGame();
+
         } else
         {
             texture = new Texture(pixmap);
