@@ -22,6 +22,7 @@
         />
 
     <Button
+        android:id="@+id/mission2_4_button"
         android:text="Svar"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"

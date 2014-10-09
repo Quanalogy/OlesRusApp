@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 
 public class Mission2_4Activity extends Activity {
@@ -44,6 +45,9 @@ public class Mission2_4Activity extends Activity {
 
     public void goOn(View view)
     {
+        Toast.makeText(getApplicationContext(), "Test", Toast.LENGTH_SHORT).show();
+        Typewriter typewriter = (Typewriter) findViewById(R.id.mission2_4);
+        typewriter.finish();
         Intent intent = new Intent(this, Mission2_5Activity.class);
         startActivity(intent);
     }

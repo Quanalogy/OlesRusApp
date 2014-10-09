@@ -55,7 +55,7 @@ public class Mission2_1Activity extends Activity
             String scanFormat = scanningResult.getFormatName();
             Log.d("OlesRusApp", "Scanned content: " + scanContent + ", scanned format: " + scanFormat);
             Intent nextIntent = new Intent(this, Mission2_2Activity.class);
-            finish();
+//            finish();
             startActivity(nextIntent);
         } else
         {

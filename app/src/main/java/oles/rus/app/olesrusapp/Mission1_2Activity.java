@@ -21,7 +21,8 @@ public class Mission1_2Activity extends FragmentActivity implements GooglePlaySe
 
     private GoogleMap mMap;
     private LocationClient mLocationClient;
-    public static final LatLng FØTEX = new LatLng(56.155454, 10.1317073);
+//    public static final LatLng FØTEX = new LatLng(56.155454, 10.1317073);
+    public static final LatLng FØTEX = new LatLng(56.1716323, 10.1882974);
     private Thread findFøtexThread;
     private static Mission1_2Activity mission1_2Activity;
 

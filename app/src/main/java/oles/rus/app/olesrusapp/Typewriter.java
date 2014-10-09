@@ -14,6 +14,7 @@ public class Typewriter extends TextView
     private long mDelay = 150;
     private static final int CURSOR_DUR = 6;
     private static final int NEW_LINE_MULTIPLIER = 3;
+    private boolean finished = false;
 
 
     public Typewriter(Context context) {
@@ -35,7 +36,8 @@ public class Typewriter extends TextView
                     delay *= NEW_LINE_MULTIPLIER;
                 }
                 setText(mText.subSequence(0, mIndex++) + "\u2588");
-                mHandler.postDelayed(characterAdder, delay);
+                if (!finished)
+                    mHandler.postDelayed(characterAdder, delay);
             } else if(mIndex > mText.length()){
                 if (mIndex % CURSOR_DUR < CURSOR_DUR/2)
                 {
@@ -44,7 +46,8 @@ public class Typewriter extends TextView
                     setText(mText);
                 }
                 mIndex++;
-                mHandler.postDelayed(characterAdder, mDelay);
+                if (!finished)
+                    mHandler.postDelayed(characterAdder, mDelay);
             } else {
                 if (Math.abs(mIndex) % CURSOR_DUR < CURSOR_DUR/2)
                 {
@@ -53,7 +56,8 @@ public class Typewriter extends TextView
                     setText(" ");
                 }
                 mIndex++;
-                mHandler.postDelayed(characterAdder, mDelay);
+                if (!finished)
+                    mHandler.postDelayed(characterAdder, mDelay);
             }
         }
     };
@@ -75,5 +79,6 @@ public class Typewriter extends TextView
     {
         mIndex = mText.length();
         setText(mText);
+        finished = true;
     }
 }
